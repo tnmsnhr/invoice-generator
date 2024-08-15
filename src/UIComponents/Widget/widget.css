@@ -1,0 +1,11 @@
+.widget {
+    padding: 2.5rem 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 2rem;
+    display: flex;
+    height: 200px;
+    aspect-ratio: 1.1;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}

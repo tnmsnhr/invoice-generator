@@ -1,0 +1,32 @@
+.invoicePreview {
+    padding: 0 2rem 2rem 2rem;
+}
+
+.templates {
+    margin-bottom: 2rem;
+    display: flex;
+    overflow: auto;
+}
+
+.templateName {
+    padding: 0.5rem 1.5rem;
+    background-color: #ebebeb;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.templateName.active {
+    background-color: #2F60F5;
+}
+
+.templateName:hover {
+    background-color: #d6d6d6;
+}
+
+.templateName.active span {
+    color: #fff !important;
+}
+
+.templateName:not(:last-child) {
+    margin-right: 1rem;
+}

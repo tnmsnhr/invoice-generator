@@ -1,0 +1,10 @@
+.thItem {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.tdItem {
+    padding: 10px 0;
+    text-align: left;
+}

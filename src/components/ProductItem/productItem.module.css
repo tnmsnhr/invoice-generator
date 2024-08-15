@@ -1,0 +1,35 @@
+.product {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product:not(:last-child) {
+    border-bottom: 1px solid #ebebeb;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.delete {
+    background-color: #fff;
+    border: 1px solid #ff5757;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-left: 1rem;
+    color: #ff5757;
+}
+
+.total {
+    width: 120px;
+    text-align: right;
+}

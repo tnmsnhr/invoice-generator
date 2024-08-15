@@ -1,0 +1,29 @@
+.sidebar {
+    height: 100%;
+    padding: 2rem 1rem;
+}
+
+.sidebar .sidebarList {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.sidebar .sidebarList a {
+    display: flex;
+    align-items: center;
+    background-color: #e1e1e1;
+    padding: 1rem;
+    border-radius: 100px;
+    transition: background-color 0.1s ease-in;
+}
+
+.sidebar .sidebarList a:hover {
+    background-color: #d3d3d3
+}
+
+.sidebar .sidebarListitem:not(:last-child) {
+    margin-bottom: 1rem;
+}

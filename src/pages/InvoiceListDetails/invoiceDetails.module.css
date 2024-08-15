@@ -1,0 +1,56 @@
+.invoiceDetails {}
+
+.invoiceListDtails {
+    border: 1px solid #d9d9d9;
+    padding: 2rem 1rem;
+    border-radius: 2rem;
+}
+
+.invoiceDetails .widgets {
+    display: flex;
+    margin: 3rem 0;
+}
+
+.widget:not(:last-child) {
+    margin-right: 2rem;
+}
+
+.invoiceDetailsTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search {
+    width: 40%;
+    margin-right: 3rem;
+}
+
+.invoiceListControl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.invoiceTabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--grey);
+    padding: 5px;
+    border-radius: 100px;
+}
+
+.invoiceTab {
+    padding: 1rem;
+    border-radius: 100px;
+}
+
+.invoiceTab.activeTab {
+    background-color: var(--inverse);
+}
+
+.invoiceTab:not(:last-child) {
+    margin-right: 1rem;
+}

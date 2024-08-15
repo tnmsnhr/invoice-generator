@@ -1,0 +1,83 @@
+.invoice {
+    font-family: Arial, sans-serif;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.companyInfo {
+    margin-top: 10px;
+}
+
+.clientInfo,
+.invoiceDetails {
+    margin-bottom: 20px;
+}
+
+.invoiceDetails p,
+.clientInfo p {
+    margin: 5px 0;
+}
+
+.invoiceTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.invoiceTable th,
+.invoiceTable td {
+    padding: 10px;
+    text-align: left;
+}
+
+.invoiceTable th {
+    background-color: #f0f0f0;
+}
+
+.invoiceTable tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.invoiceTable tfoot td {
+    padding: 10px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.grandTotalLabel {
+    background-color: #d3d3d3;
+}
+
+.grandTotal {
+    color: red;
+    font-size: 20px;
+}
+
+.terms,
+.paymentInfo {
+    margin-top: 20px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: #777;
+}
+
+.footer p {
+    margin: 5px 0;
+}

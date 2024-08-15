@@ -1,0 +1,80 @@
+.createInvoice {}
+
+.createInvoiceHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.createInvoiceSection {
+    margin-top: 2rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 2rem;
+    overflow: hidden;
+    padding-bottom: 1rem;
+}
+
+.createInvoiceSectionHeader {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.createInvoiceForm {
+    padding: 1rem;
+}
+
+.createInvoiceForm .billingSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.verticalSeparator {
+    width: 1px;
+    background-color: #d9d9d9;
+}
+
+.dateSection {
+    position: relative;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    width: 45%;
+}
+
+.dateSectionItem {
+    width: 100%;
+}
+
+.dateSectionItem:not(:last-child) {
+    margin-right: 2rem;
+}
+
+.dateButton {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.itemDetails {
+    margin-top: 2rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 2rem;
+}
+
+.itemDetailsHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.subtotalSection {
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

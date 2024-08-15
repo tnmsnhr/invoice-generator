@@ -1,0 +1,22 @@
+.layout {
+    background-color: var(--grey);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-content {
+    display: flex;
+    flex: 1
+}
+
+.sidebar-content {
+    width: 10rem;
+}
+
+.content {
+    background-color: rgb(255, 255, 255);
+    flex: 1;
+    border-top-left-radius: 2rem;
+    padding: 3rem 2rem;
+}

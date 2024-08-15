@@ -1,0 +1,46 @@
+.invoiceSummary {
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+    position: relative;
+}
+
+.invoiceSummary:hover {
+    background-color: var(--grey);
+}
+
+.invoice-summary-item {
+    flex: 1;
+    padding: 1rem;
+}
+
+.invoice-summary-item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.preview {
+    background-color: transparent;
+}
+
+.preview:hover svg {
+    fill: #182f76;
+}
+
+.optionContainer {
+    position: absolute;
+    right: 0;
+    top: 3.2rem;
+    background-color: #fff;
+    width: 150px;
+    border-radius: 1rem;
+    z-index: 500;
+    padding: 0.5rem 0;
+    box-shadow: 0 0px 1rem rgba(0, 0, 0, 0.2);
+}
+
+.option {
+    padding: 8px 1rem;
+}
+
+.option:hover {
+    background-color: var(--grey);
+}

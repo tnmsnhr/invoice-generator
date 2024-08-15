@@ -1,0 +1,98 @@
+.addCustomer {
+    position: relative;
+}
+
+.customerHeader {
+    padding: 1.5rem;
+    border-bottom: 1px solid #d9d9d9;
+    background-color: #f5f7fe;
+}
+
+.customerContent {
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+.customerSuggestions {
+    background-color: #fff;
+    border-radius: 1rem;
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    box-shadow: 5px 1rem 2rem rgba(0, 0, 0, 0.3);
+    max-height: 15rem;
+    overflow: auto;
+    padding: 10px 0;
+
+}
+
+.customerSuggestionsItem {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.customerDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    background-color: #fafafa;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.customerPreview {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: last baseline;
+}
+
+.customerForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.customerForm input {
+    margin-top: 1rem;
+}
+
+.address {
+    resize: vertical;
+    min-height: 5rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    font-size: 16px;
+    margin-top: 1rem;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.address:focus {
+    border-color: #007bff;
+}
+
+.namePhone {
+    display: flex;
+}
+
+.namePhone input:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.formButton {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.customerFooter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem 1rem 1rem;
+}

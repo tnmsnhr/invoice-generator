@@ -1,0 +1,25 @@
+/* table */
+
+.invoiceListTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.invoiceListTable thead {
+    background-color: var(--grey);
+    padding: 0.5rem 0;
+}
+
+.invoiceListTable td {
+    padding: 0.5rem 1rem;
+}
+
+.invoiceListTable thead td:first-child {
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
+}
+
+.invoiceListTable thead td:last-child {
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}

@@ -1,0 +1,67 @@
+.text {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.text.title1 {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.text.title2 {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.text.title3 {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.text.body1 {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.text.body2 {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.text.button1 {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.text.button2 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.text.subtitle {
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.text.subtitleBold {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.text.caption {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.text.captionBold {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.4;
+}

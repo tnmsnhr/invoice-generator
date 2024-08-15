@@ -1,0 +1,41 @@
+.productListsContainer {
+    position: relative;
+}
+
+.itemAddButton {
+    position: absolute;
+    transform: translateY(-50%);
+    left: 3rem;
+}
+
+.header {
+    margin: 1rem 1.5rem;
+}
+
+.productLists {
+    background-color: var(--grey);
+    margin: 0rem 1rem 4rem 1rem;
+    border-radius: 1rem;
+}
+
+/* Table styles */
+
+input {
+    border: 1px solid grey;
+    padding: 5px;
+    outline: none;
+    border-radius: 10px;
+}
+
+.name {
+    width: 100%;
+}
+
+.item {
+    width: 100%;
+}
+
+.total {
+    width: 120px;
+    text-align: right;
+}
