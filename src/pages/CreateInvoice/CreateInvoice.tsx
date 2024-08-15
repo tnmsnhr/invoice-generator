@@ -22,6 +22,8 @@ import { formatDateToDDMMYYYY } from "utils/date"
 import Spinner from "UIComponents/Spinner"
 import InvoicePreview from "components/InvoicePreview"
 import { useBlockNavigation } from "hooks/useBlockNavigation"
+import ToastManager from "UIComponents/Toast/ToastManager"
+import { useToast } from "contexts/ToastContext"
 
 const billingFromAddress: Customer = {
     address: "#3/4 Fifth Block, Koramangala, Bangalore",
@@ -45,6 +47,8 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
     const [selectedDateType, setSelectedDateType] = useState<DateFlag | null>()
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [showPreview, setShowPreview] = useState<boolean>(false)
+    const { addToast } = useToast();
+
 
 
     const navigate = useNavigate();
@@ -55,6 +59,8 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
     }
 
     const saveInvoice = () => {
+        addToast("success", "Demo")
+        return
         setIsLoading(true)
         onSaveInvoice(selectedInvoice as Invoice)
             .then(() => {

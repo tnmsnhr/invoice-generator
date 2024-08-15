@@ -9,6 +9,7 @@ import Customers from 'pages/Customers';
 import { Provider } from 'react-redux';
 import { store, persistor } from 'store/store';
 import CreateInvoice from 'pages/CreateInvoice';
+import { ProductFormProvider } from 'contexts/ProductFormContext';
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/customers" element={<Customers />} />
-              <Route path="/create-invoice" element={<CreateInvoice />} />
+              <Route path="/create-invoice" element={<ProductFormProvider>
+                <CreateInvoice />
+              </ProductFormProvider>} />
               <Route path="/" element={<InvoiceListDetails />} />
             </Routes>
           </Layout>
