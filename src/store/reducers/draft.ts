@@ -16,8 +16,8 @@ export const draftReducer = (state = initialState, action: any): DraftReducer =>
             const upcomingDraft = action.payload as Invoice
             const newDrafts = [...state.drafts]
             const foundIndex = newDrafts.findIndex(draft => draft.id == upcomingDraft.id)
-            if (foundIndex <= 0) {
-                newDrafts.push(upcomingDraft)
+            if (foundIndex < 0) {
+                newDrafts.push(action.payload)
             }
             return {
                 ...state,

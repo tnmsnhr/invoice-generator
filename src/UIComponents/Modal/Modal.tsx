@@ -14,14 +14,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
 
     return ReactDOM.createPortal(
         <div className={styles.modalOverlay} onClick={onClose}>
-            <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                <div className={styles.modalHeader}>
-                    <button className={styles.modalCloseButton} onClick={onClose}>
-                        &times;
-                    </button>
-                </div>
-                <div className={styles.modalBody}>
-                    {children}
+            <div className={styles.modalContentContainer}>
+                <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
+                    <div className={styles.modalHeader}>
+                        <button className={styles.modalCloseButton} onClick={onClose}>
+                            &times;
+                        </button>
+                    </div>
+                    <div className={styles.modalBody}>
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>,

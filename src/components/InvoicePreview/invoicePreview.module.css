@@ -13,14 +13,15 @@
     background-color: #ebebeb;
     border-radius: 100px;
     cursor: pointer;
+    transition: background-color 0.2s ease-in;
 }
 
 .templateName.active {
-    background-color: #2F60F5;
+    background-color: var(--grey-dark);
 }
 
 .templateName:hover {
-    background-color: #d6d6d6;
+    background-color: var(--grey-dark);
 }
 
 .templateName.active span {
@@ -29,4 +30,8 @@
 
 .templateName:not(:last-child) {
     margin-right: 1rem;
+}
+
+.templateContent {
+    height: 100%;
 }

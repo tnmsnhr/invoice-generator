@@ -13,7 +13,9 @@ interface InputProps {
     disabled?: boolean;
     defaultValue?: any;
     onBlur?: () => void;
-    required?: boolean
+    required?: boolean;
+    min?: number;
+    max?: number
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,7 +30,9 @@ const Input: React.FC<InputProps> = ({
     disabled,
     defaultValue,
     onBlur,
-    required = false
+    required = false,
+    min,
+    max
 }) => {
     return (
         <input
@@ -44,6 +48,9 @@ const Input: React.FC<InputProps> = ({
             disabled={disabled}
             defaultValue={defaultValue}
             onBlur={onBlur}
+            min={min}
+            max={max}
+            step="any"
         />
     );
 };

@@ -3,6 +3,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.cellLabel {
+    display: none;
 }
 
 .product:not(:last-child) {
@@ -32,4 +37,26 @@
 .total {
     width: 120px;
     text-align: right;
+}
+
+@media (max-width: 768px) {
+    .product {
+        display: block;
+    }
+
+    .cellLabel {
+        display: block;
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .delete {
+        width: 100%;
+        margin: 1rem 0;
+    }
 }

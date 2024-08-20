@@ -33,3 +33,32 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+/* scrollbar */
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track (background) of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #fff;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+/* Thumb (draggable part) of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  /* Add padding around the thumb */
+}
+
+/* Hover effect on the thumb */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #f1f1f1;
+}

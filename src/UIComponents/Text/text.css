@@ -65,3 +65,13 @@
     font-weight: bold;
     line-height: 1.4;
 }
+
+@media (max-width: 768px) {
+    .text.title1 {
+        font-size: 28px;
+    }
+
+    .text.title2 {
+        font-size: 24px;
+    }
+}

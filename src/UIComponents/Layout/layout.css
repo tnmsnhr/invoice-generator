@@ -7,7 +7,8 @@
 
 .main-content {
     display: flex;
-    flex: 1
+    flex: 1;
+    overflow: hidden;
 }
 
 .sidebar-content {
@@ -19,4 +20,5 @@
     flex: 1;
     border-top-left-radius: 2rem;
     padding: 3rem 2rem;
+    overflow: auto;
 }

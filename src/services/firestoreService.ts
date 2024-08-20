@@ -32,7 +32,8 @@ export const getDocuments = async (collectionName: string): Promise<Invoice[]> =
                 itemsDetails: data?.itemsDetails,
                 paymentDueDate: data?.paymentDueDate,
                 total: data?.total,
-                status: data?.status
+                status: data?.status,
+                invoiceNumber: data?.invoiceNumber
             }
 
             return invoice
@@ -56,9 +57,10 @@ export const updateDocument = async (collectionName: string, docId: string, upda
 export const deleteDocument = async (collectionName: string, docId: string) => {
     try {
         const docRef = doc(firestore, collectionName, docId);
-        await deleteDoc(docRef);
+        const result = await deleteDoc(docRef);
+        return result
     } catch (error) {
         console.error("Error deleting document: ", error);
-        throw error;
+        return Promise.reject(error)
     }
 };

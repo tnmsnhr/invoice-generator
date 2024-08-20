@@ -1,8 +1,8 @@
-import { CUSTOMER_SELECTED, SAVE_CUSTOMER_FAILURE, SAVE_CUSTOMER_REQUEST, SAVE_CUSTOMER_SUCCESS, UPDATE_SELECTED_CUSTOMER } from "store/types/actionTypes";
+import { CUSTOMER_SELECTED, FETCH_CUSTOMERS_FAILURE, FETCH_CUSTOMERS_REQUEST, FETCH_CUSTOMERS_SUCCESS, SAVE_CUSTOMER_FAILURE, SAVE_CUSTOMER_REQUEST, SAVE_CUSTOMER_SUCCESS, UPDATE_SELECTED_CUSTOMER } from "store/types/actionTypes";
 import { Customer, Invoice, Product } from "types/types";
 
 
-interface CustomerReducer {
+export interface CustomerReducer {
     loading: boolean;
     customers: Customer[];
     error: string | null;
@@ -18,6 +18,22 @@ const initialState: CustomerReducer = {
 
 export const customerReducer = (state = initialState, action: any): CustomerReducer => {
     switch (action.type) {
+        case FETCH_CUSTOMERS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case FETCH_CUSTOMERS_FAILURE:
+            return {
+                ...state,
+                loading: false
+            }
+        case FETCH_CUSTOMERS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                customers: action.payload
+            }
         case SAVE_CUSTOMER_REQUEST:
             return {
                 ...state,

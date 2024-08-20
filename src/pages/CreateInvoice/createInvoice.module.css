@@ -1,17 +1,45 @@
-.createInvoice {}
+.createInvoice {
+    /* padding: 1rem; */
+    /* height: 100vh; */
+}
 
 .createInvoiceHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    top: 0;
+    left: 0;
+    background-color: var(--inverse);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.headerLeft,
+.headerLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createInvoiceContent {
+    padding: 1rem 2rem;
+    /* background-color: #d9d9d9; */
+    height: 100%;
+    margin-top: 80px;
 }
 
 .createInvoiceSection {
-    margin-top: 2rem;
+    margin-top: 1rem;
     border: 1px solid #d9d9d9;
     border-radius: 2rem;
     overflow: hidden;
     padding-bottom: 1rem;
+    background-color: var(--inverse);
 }
 
 .createInvoiceSectionHeader {
@@ -43,14 +71,11 @@
     display: flex;
     align-items: center;
     width: 45%;
+    flex-direction: column;
 }
 
 .dateSectionItem {
     width: 100%;
-}
-
-.dateSectionItem:not(:last-child) {
-    margin-right: 2rem;
 }
 
 .dateButton {
@@ -65,6 +90,7 @@
     margin-top: 2rem;
     border: 1px solid #d9d9d9;
     border-radius: 2rem;
+    position: relative;
 }
 
 .itemDetailsHeader {
@@ -77,4 +103,36 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+.totalValue {
+    width: 200px;
+    text-align: right;
+}
+
+.goBackModal {
+    padding: 2rem;
+}
+
+.modalButtons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Tablets / Small Desktops */
+@media (min-width: 768px) {
+    .dateSection {
+        flex-direction: row;
+    }
+
+    .dateSectionItem:not(:last-child) {
+        margin-right: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .billingSection {
+        flex-direction: column;
+    }
 }

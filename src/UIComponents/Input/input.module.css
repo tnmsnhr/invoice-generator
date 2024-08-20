@@ -17,3 +17,9 @@
     background-color: #f5f5f5;
     cursor: not-allowed;
 }
+
+@media (max-width: 800px) {
+    .input {
+        padding: 5px 5px 5px 10px;
+    }
+}

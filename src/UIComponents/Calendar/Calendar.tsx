@@ -1,30 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import "./calendar.css"
-import { Calendar as RCalendar } from 'react-calendar';
-import Button from 'UIComponents/Button';
+import CalendarComponent from "./Partial/Calendar";
+import Button from "UIComponents/Button";
 
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-interface CalendarProps {
-    onChangeDate: (data: string) => void
+interface ICalendarProps {
+    onChangeDate: (epoch: string) => void;
 }
 
-const Calendar: React.FC<CalendarProps> = ({ onChangeDate }) => {
-    const [value, onChange] = useState<Value>(new Date());
+const CustomCalendar: React.FC<ICalendarProps> = ({ onChangeDate }) => {
+    const [date, setDate] = useState<Date>(new Date())
 
-    const executeCallBack = () => {
-        const newData = new Date(value?.toString() as string)
+    const selectDateHandler = () => {
+        const newData = new Date(date?.toString() as string)
         const epoch = Math.floor(newData.getTime() / 1000)
+
         onChangeDate(epoch?.toString())
     }
+
     return (
-        <div className="calendar">
-            <RCalendar onChange={onChange} value={value} />
-            <Button variant="outline" style={{ margin: "2rem 0", width: "100%" }} onClick={executeCallBack}>Apply</Button>
+        <div id="calendar">
+            <CalendarComponent
+                setDate={setDate}
+                date={date}
+                selectRange={false}
+            />
+            <Button variant="outline"
+                onClick={selectDateHandler}
+                style={{
+                    margin: "1.5rem"
+                }}
+            >Select Date</Button>
         </div>
     );
-}
+};
 
-export default Calendar
+export default CustomCalendar;

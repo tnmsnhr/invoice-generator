@@ -27,6 +27,15 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "allowJs": true,
+  "lib": [
+    "dom",
+    "dom.iterable",
+    "esnext"
   ]
 }

@@ -48,19 +48,22 @@ export const updateSelectedCustomer = (payload: Customer) => ({
     payload
 })
 
-export const selectCustomer = (payload: Customer) => ({
+export const selectCustomer = (payload: Customer | null) => ({
     type: CUSTOMER_SELECTED,
     payload
 })
 
-export const fetchCustomers = (): ThunkAction<void, RootState, unknown, Action<string>> => {
+export const fetchCustomers = (): ThunkAction<Promise<Customer>, RootState, unknown, Action<string>> => {
+    // @ts-ignore
     return async (dispatch: Dispatch) => {
         dispatch(fetchCustomersRequest())
         try {
             const customers = await getCustomers("customers")
             dispatch(fetchCustomersSuccess(customers))
+            return customers
         } catch (error: any) {
             dispatch(fetchCustomersFailure(error?.message))
+            return Promise.reject(error)
         }
     }
 }

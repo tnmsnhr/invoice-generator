@@ -1,6 +1,13 @@
+import { Invoice } from "types/types";
 import styles from "./invoiceModernMinimal.module.css"
+import { formatDateToCustomFormat } from "utils/date";
 
-const InvoiceModernMinimal = () => {
+interface InvoiceProps {
+    invoice: Invoice | undefined | null;
+}
+
+const InvoiceModernMinimal: React.FC<InvoiceProps> = ({ invoice }) => {
+    console.log(invoice)
     return (
         <div className={styles.invoice}>
             <header className={styles.header}>
@@ -11,77 +18,55 @@ const InvoiceModernMinimal = () => {
             </header>
 
             <section className={styles.clientInfo}>
-                <p><strong>To:</strong> KETUT SUSILO</p>
-                <p>123 Anywhere St., Any City, ST 12345</p>
+                <p><strong>To:</strong> {invoice?.billingTo?.name}</p>
+                <p>{invoice?.billingTo?.address}</p>
             </section>
 
             <section className={styles.invoiceDetails}>
-                <p><strong>Date:</strong> 25 June 2022</p>
-                <p><strong>Invoice no:</strong> 12345</p>
+                <p><strong>Date:</strong> {invoice?.invoiceDate && formatDateToCustomFormat(+invoice?.invoiceDate)}</p>
+                <p><strong>Due Date:</strong> {invoice?.paymentDueDate && formatDateToCustomFormat(+invoice?.paymentDueDate)}</p>
             </section>
 
             <table className={styles.invoiceTable}>
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>DESCRIPTION</th>
+                        <th>Item</th>
                         <th>QTY</th>
                         <th>PRICE</th>
+                        <th>DISCOUNT</th>
                         <th>TOTAL</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Consultation</td>
-                        <td>1</td>
-                        <td>$300</td>
-                        <td>$300</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Project Draft</td>
-                        <td>2</td>
-                        <td>$2,400</td>
-                        <td>$4,800</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Implementation</td>
-                        <td>3</td>
-                        <td>$2,500</td>
-                        <td>$7,500</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Additional Supplies</td>
-                        <td>4</td>
-                        <td>$750</td>
-                        <td>$3,000</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Monthly meeting</td>
-                        <td>15</td>
-                        <td>$2,000</td>
-                        <td>$30,000</td>
-                    </tr>
+                    {invoice?.itemsDetails?.map((item, index) => (
+                        <tr>
+                            <td>{index + 1}</td>
+                            <td>{item?.name}</td>
+                            <td>{item?.quantity}</td>
+                            <td>${item?.discount}</td>
+                            <td>${item?.price}</td>
+                            <td>${item?.price * item?.quantity - item?.discount}</td>
+                        </tr>
+                    ))}
+
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan={4}>Sub Total</td>
+                        <td colSpan={5}>Sub Total</td>
                         <td>$7,950</td>
                     </tr>
                     <tr>
-                        <td colSpan={4}>Tax 10%</td>
+                        <td colSpan={5}>Tax 10%</td>
                         <td>$795</td>
                     </tr>
                     <tr>
-                        <td colSpan={4}>Discount</td>
+                        <td colSpan={5}>Discount</td>
                         <td>$500</td>
                     </tr>
+
                     <tr>
-                        <td colSpan={4} className={styles.grandTotalLabel}>GRAND TOTAL</td>
+                        <td colSpan={5} className={styles.grandTotalLabel}>GRAND TOTAL</td>
                         <td className={styles.grandTotal}>$8,245</td>
                     </tr>
                 </tfoot>

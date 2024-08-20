@@ -15,6 +15,7 @@ import Spinner from "UIComponents/Spinner"
 import { useNavigate } from "react-router-dom"
 import { findCustomers } from "services/customerSerives"
 import Address from "UIComponents/Address"
+import { IoMdAdd } from "react-icons/io"
 
 type CustomerKey = keyof Customer;
 
@@ -131,7 +132,17 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ onSaveCustomer, selectedCusto
                             <div className={styles.customerPreview}>
                                 <Address data={customer as Customer} style={{ textAlign: "left", flex: 1 }} />
                                 <Button variant="error" onClick={deleteCustomerHandler}>Delete</Button>
-                            </div> : <Button variant="outline" style={{ margin: "4rem 0" }} onClick={handleNewCustomer}>Add New Customer</Button> :
+                            </div> :
+                            <Button
+                                className="align-center"
+                                variant="outline"
+                                style={{ margin: "4rem 0" }}
+                                onClick={handleNewCustomer}>
+                                Add New Customer
+                                <IoMdAdd size={24} style={{
+                                    marginLeft: "0.5rem"
+                                }} />
+                            </Button> :
                         <div className={styles.customerForm}>
                             <form onSubmit={(e) => saveCustomerHandler(e)} >
                                 <Input

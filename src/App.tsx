@@ -1,34 +1,59 @@
+import React, { Suspense, lazy } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Layout from 'UIComponents/Layout';
 import './App.css';
 import "./theme/theme.css"
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Layout from 'UIComponents/Layout';
 import { PersistGate } from 'redux-persist/integration/react';
-import InvoiceListDetails from 'pages/InvoiceListDetails';
 import Customers from 'pages/Customers';
-import { Provider } from 'react-redux';
-import { store, persistor } from 'store/store';
-import CreateInvoice from 'pages/CreateInvoice';
-import { ProductFormProvider } from 'contexts/ProductFormContext';
+import { persistor } from 'store/store';
+import ProtectedRoute from 'routes';
+import { RootState } from 'store/reducers/rootReducer';
+import { Customer } from 'types/types';
+import Spinner from 'UIComponents/Spinner';
 
-function App() {
+const CreateInvoiceLazy = lazy(() => import('pages/CreateInvoice'))
+const InvoiceListDetailsLazy = lazy(() => import('pages/InvoiceListDetails'))
+const CustomersLazy = lazy(() => import('pages/Customers'))
+
+interface AppProps {
+  selectedCustomer?: Customer
+}
+const App: React.FC<AppProps> = ({ selectedCustomer }) => {
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/customers" element={<Customers />} />
-              <Route path="/create-invoice" element={<ProductFormProvider>
-                <CreateInvoice />
-              </ProductFormProvider>} />
-              <Route path="/" element={<InvoiceListDetails />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/create-invoice" element={
+              <ProtectedRoute isAllowed={!!selectedCustomer}>
+                <CreateInvoiceLazy />
+              </ProtectedRoute>
+            } />
+          </Routes>
+
+          <Routes>
+            <Route path="/customers" element={
+              <Layout>
+                <CustomersLazy />
+              </Layout>
+            } />
+            <Route path="/" element={<Layout>
+              <InvoiceListDetailsLazy />
+            </Layout>} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </PersistGate>
   );
 }
 
-export default App;
+const mapStateToProps = (state: RootState) => {
+  return {
+    selectedCustomer: state.customers.selectedCustomer
+  }
+}
+// @ts-ignore
+export default connect(mapStateToProps)(App);

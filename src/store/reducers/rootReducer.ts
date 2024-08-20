@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import storage from 'redux-persist/lib/storage'
 import { createTransform, persistReducer } from 'redux-persist'
-import { invoiceReducer } from "./invoice";
-import { customerReducer } from "./customer";
+import { InvoiceReducer, invoiceReducer } from "./invoice";
+import { CustomerReducer, customerReducer } from "./customer";
 import { draftReducer } from "./draft";
 
 const selectedInvoiceTransform = createTransform(
-    (inboundState: any) => {
+    (inboundState: InvoiceReducer) => {
         return { selectedInvoice: inboundState.selectedInvoice };
     },
     (outboundState: any, key) => {
@@ -15,11 +15,21 @@ const selectedInvoiceTransform = createTransform(
     { whitelist: ['invoices'] }
 );
 
+const selectedCustomerTransform = createTransform(
+    (inboundState: CustomerReducer) => {
+        return { selectedCustomer: inboundState.selectedCustomer };
+    },
+    (outboundState: any, key) => {
+        return outboundState;
+    },
+    { whitelist: ['customers'] }
+);
+
 const persisitConfig = {
     key: "root",
     storage,
-    whitelist: ['invoices', 'drafts'],
-    transforms: [selectedInvoiceTransform]
+    whitelist: ['invoices', 'drafts', "customers"],
+    transforms: [selectedInvoiceTransform, selectedCustomerTransform]
 }
 
 const rootReducer = combineReducers({

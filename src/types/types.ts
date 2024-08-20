@@ -23,5 +23,6 @@ export type Invoice = {
     itemsDetails: Product[];
     paymentDueDate?: string,
     total: number,
-    status?: string
+    status?: string,
+    invoiceNumber: string
 };

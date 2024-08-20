@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store, persistor } from 'store/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -10,9 +12,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ToastProvider>
-      <App />
-    </ToastProvider>
+    <Provider store={store}>
+      <ToastProvider>
+        <App />
+      </ToastProvider>
+    </Provider>
   </React.StrictMode>
 );
 

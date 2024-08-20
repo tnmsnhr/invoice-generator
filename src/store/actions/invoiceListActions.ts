@@ -1,6 +1,6 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { addDocument, getDocuments } from 'services/firestoreService';
+import { addDocument, deleteDocument, getDocuments } from 'services/firestoreService';
 import { RootState } from 'store/reducers/rootReducer';
 import {
     FETCH_INVOICES_FAILURE,
@@ -10,9 +10,12 @@ import {
     UPDATE_NEW_INVOICE,
     SAVE_INVOICE_REQUEST,
     SAVE_INVOICE_SUCCESS,
-    SAVE_CUSTOMER_FAILURE,
     SAVE_TO_DRAFT,
-    DELETE_FROM_DRAFT
+    DELETE_FROM_DRAFT,
+    DELETE_INVOICE_REQUEST,
+    DELETE_INVOICE_SUCCESS,
+    DELETE_INVOICE_FAILURE,
+    SAVE_INVOICE_FAILURE
 } from "store/types/actionTypes";
 import { Invoice } from 'types/types';
 
@@ -35,7 +38,7 @@ export const createNewInvoice = (payload: Invoice) => ({
     payload
 })
 
-export const updateNewInvoice = (payload: Invoice) => ({
+export const updateNewInvoice = (payload: Invoice | null) => ({
     type: UPDATE_NEW_INVOICE,
     payload
 })
@@ -45,6 +48,7 @@ export const fetchInvoices = (): ThunkAction<void, RootState, unknown, Action<st
         dispatch(fetchInvoiceListRequest())
         try {
             const invoices = await getDocuments("invoices")
+            console.log("invoices", invoices)
             dispatch(fetchInvoiceListSuccess(invoices))
         } catch (error: any) {
             dispatch(fetchInvoiceListFailure(error?.message))
@@ -61,7 +65,7 @@ const saveInvoiceSuccess = () => ({
 })
 
 const saveInvoiceFailure = (payload: String) => ({
-    type: SAVE_CUSTOMER_FAILURE,
+    type: SAVE_INVOICE_FAILURE,
     payload
 })
 
@@ -77,6 +81,36 @@ export const saveInvoice = (invoice: Invoice): ThunkAction<Promise<Invoice>, Roo
             return invoiceResult
         } catch (error: any) {
             dispatch(saveInvoiceFailure(error?.message))
+            return Promise.reject(error)
+        }
+    }
+}
+
+const deleteInvoiceRequest = () => ({
+    type: DELETE_INVOICE_REQUEST
+})
+
+const deleteInvoiceSuccess = (payload: string) => ({
+    type: DELETE_INVOICE_SUCCESS,
+    payload
+})
+
+const deleteInvoiceFailure = (payload: String) => ({
+    type: DELETE_INVOICE_FAILURE,
+    payload
+})
+
+export const deleteInvoice = (invoiceId: string): ThunkAction<Promise<Invoice>, RootState, unknown, Action<string>> => {
+    // @ts-ignore
+    return async (dispatch: Dispatch) => {
+        dispatch(deleteInvoiceRequest())
+        try {
+            const invoiceResult = await deleteDocument("invoices", invoiceId)
+            console.log("invoiceResult---", invoiceResult)
+            dispatch(deleteInvoiceSuccess(invoiceId))
+            return invoiceResult
+        } catch (error: any) {
+            dispatch(deleteInvoiceFailure(error?.message))
             return Promise.reject(error)
         }
     }

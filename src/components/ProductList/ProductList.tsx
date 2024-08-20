@@ -5,6 +5,7 @@ import { TextColor, TextType } from "UIComponents/Text/Text"
 import Button from "UIComponents/Button"
 import { Invoice, Product } from "types/types"
 import React, { useEffect, useState } from "react"
+import { IoMdAdd } from "react-icons/io"
 
 interface ProductListProps {
     invoice: Invoice | null,
@@ -24,7 +25,7 @@ const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoic
             id: Date.now().toString(),
             name: "",
             price: 0,
-            quantity: 0
+            quantity: 1
         }
         updatedInvoiceDetails?.itemsDetails?.push(newProduct)
         setInvoiceDetails(updatedInvoiceDetails as Invoice)
@@ -97,7 +98,15 @@ const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoic
                     deleteProduct={deleteProduct}
                 />)}
             </div>
-            <Button className={styles.itemAddButton} onClick={handleAddItem}>Add an item</Button>
+            <Button
+                className={`align-center ${styles.itemAddButton}`}
+                onClick={handleAddItem}
+                type="button"
+            >Add an item
+                <IoMdAdd size={24} style={{
+                    marginLeft: "0.5rem"
+                }} />
+            </Button>
         </div>
     )
 }

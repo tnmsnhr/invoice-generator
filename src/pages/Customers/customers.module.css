@@ -1,0 +1,10 @@
+.customerContent {
+    margin-top: 2rem;
+}
+
+.customerItem {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--grey);
+    border-radius: 2rem;
+}

@@ -1,5 +1,5 @@
 .productListsContainer {
-    position: relative;
+    /* position: relative; */
 }
 
 .itemAddButton {
@@ -38,4 +38,14 @@ input {
 .total {
     width: 120px;
     text-align: right;
+}
+
+@media (max-width: 768px) {
+    .productListsContainer {
+        margin-top: 1rem;
+    }
+
+    .header {
+        display: none;
+    }
 }

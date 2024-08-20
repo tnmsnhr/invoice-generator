@@ -58,7 +58,9 @@ const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice }) => {
                         <Text type={TextType.Button2}>Modern Minimal</Text>
                     </div>
                 </div>
-                <Template invoice={invoice} />
+                <div className={styles.templateContent}>
+                    <Template invoice={invoice} />
+                </div>
             </div>
         </>
     )
