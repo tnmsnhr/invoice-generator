@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './button.module.css';
+import * as  styles from './button.module.css';
 
 interface ButtonProps {
     children: React.ReactNode;
     onClick?: () => void;
-    variant?: 'primary' | 'outline' | 'default' | "error" | "default-outline" | "ghost";
+    variant?: 'primary' | 'outline' | 'default' | "error" | "default-outline" | "ghost" | "primary-success";
     className?: string;
     style?: React.CSSProperties;
     disabled?: boolean;

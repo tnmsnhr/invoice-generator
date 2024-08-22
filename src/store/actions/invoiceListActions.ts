@@ -1,6 +1,6 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { addDocument, deleteDocument, getDocuments } from 'services/firestoreService';
+import { addDocument, deleteDocument, getDocuments, updateDocument } from 'services/firestoreService';
 import { RootState } from 'store/reducers/rootReducer';
 import {
     FETCH_INVOICES_FAILURE,
@@ -125,3 +125,16 @@ export const deleteInvoiceFromDraft = (payload: string) => ({
     type: DELETE_FROM_DRAFT,
     payload
 })
+
+export const updateInvoice = (invoice: Invoice): ThunkAction<Promise<Invoice>, RootState, unknown, Action<string>> => {
+    // @ts-ignore
+    return async (dispatch: Dispatch) => {
+        try {
+            const id = invoice.id as string
+            const result = await updateDocument("invoices", id, invoice)
+            return result
+        } catch (error) {
+            return Promise.reject(error)
+        }
+    }
+}

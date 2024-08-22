@@ -1,5 +1,5 @@
 import Input from "UIComponents/Input"
-import styles from "./productItem.module.css"
+import * as  styles from "./productItem.module.css"
 import { Product } from "types/types"
 import Button from "UIComponents/Button";
 import Text from "UIComponents/Text";
@@ -27,7 +27,6 @@ const ProductItem: React.FC<ProductItemProps> = ({ data, index, onChangeFieldVal
                         Item Name
                     </Text>
                     <Input
-                        className={styles.name}
                         value={data?.name}
                         required
                         name="name"
@@ -44,7 +43,6 @@ const ProductItem: React.FC<ProductItemProps> = ({ data, index, onChangeFieldVal
                         Quantity
                     </Text>
                     <Input
-                        className={styles.item}
                         type="number"
                         defaultValue={data?.quantity}
                         min={1}
@@ -63,7 +61,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ data, index, onChangeFieldVal
                         Price
                     </Text>
                     <Input
-                        className={styles.item}
+
                         type="number"
                         defaultValue={data?.price}
                         required
@@ -82,7 +80,6 @@ const ProductItem: React.FC<ProductItemProps> = ({ data, index, onChangeFieldVal
                         Discount
                     </Text>
                     <Input
-                        className={styles.item}
                         defaultValue={data?.discount}
                         type="number"
                         onChange={(e) => {

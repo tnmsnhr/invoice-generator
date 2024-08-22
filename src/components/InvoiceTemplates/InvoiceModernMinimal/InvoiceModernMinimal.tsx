@@ -1,5 +1,5 @@
 import { Invoice } from "types/types";
-import styles from "./invoiceModernMinimal.module.css"
+import * as  styles from "./invoiceModernMinimal.module.css"
 import { formatDateToCustomFormat } from "utils/date";
 
 interface InvoiceProps {

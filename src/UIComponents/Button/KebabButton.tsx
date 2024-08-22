@@ -1,4 +1,4 @@
-import styles from "./kebab.module.css"
+import * as  styles from "./kebab.module.css"
 
 interface KebabButtonProps {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

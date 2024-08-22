@@ -21,6 +21,15 @@ button {
     transition: all 0.1s ease-in;
 }
 
+.primary-success {
+    background-color: #4fa14f;
+    color: white;
+}
+
+.primary-success:hover {
+    background-color: #3f7e3f;
+}
+
 .outline {
     border-radius: 100px;
     border: 1px solid var(--primary-color);

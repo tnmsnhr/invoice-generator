@@ -47,10 +47,10 @@ export const getDocuments = async (collectionName: string): Promise<Invoice[]> =
 export const updateDocument = async (collectionName: string, docId: string, updatedData: any) => {
     try {
         const docRef = doc(firestore, collectionName, docId);
-        await updateDoc(docRef, updatedData);
+        const result = await updateDoc(docRef, updatedData);
+        return result
     } catch (error) {
-        console.error("Error updating document: ", error);
-        throw error;
+        return Promise.reject(error)
     }
 };
 

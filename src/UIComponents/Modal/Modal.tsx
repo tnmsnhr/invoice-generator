@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from './modal.module.css';
+import * as  styles from './modal.module.css';
 
 interface ModalProps {
     isOpen: boolean;
@@ -16,7 +16,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         <div className={styles.modalOverlay} onClick={onClose}>
             <div className={styles.modalContentContainer}>
                 <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
-                    <div className={styles.modalHeader}>
+                    <div>
                         <button className={styles.modalCloseButton} onClick={onClose}>
                             &times;
                         </button>

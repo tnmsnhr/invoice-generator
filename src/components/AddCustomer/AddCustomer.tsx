@@ -1,5 +1,5 @@
 import Text from "UIComponents/Text"
-import styles from "./addCustomer.module.css"
+import * as  styles from "./addCustomer.module.css"
 import { TextColor, TextType } from "UIComponents/Text/Text"
 import Input from "UIComponents/Input"
 import Button from "UIComponents/Button"

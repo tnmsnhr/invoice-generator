@@ -1,5 +1,5 @@
 import ProductItem from "components/ProductItem"
-import styles from "./productList.module.css"
+import * as  styles from "./productList.module.css"
 import Text from "UIComponents/Text"
 import { TextColor, TextType } from "UIComponents/Text/Text"
 import Button from "UIComponents/Button"

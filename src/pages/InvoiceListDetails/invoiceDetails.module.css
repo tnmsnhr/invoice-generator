@@ -54,14 +54,3 @@
 .invoiceTab:not(:last-child) {
     margin-right: 1rem;
 }
-
-.noData {
-    background-color: #d4defa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
-    margin: 0 auto;
-    padding: 1rem;
-    border-radius: 0.5rem;
-}

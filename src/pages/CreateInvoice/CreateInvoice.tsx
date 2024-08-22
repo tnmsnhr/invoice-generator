@@ -5,7 +5,7 @@ import { AnyAction } from "redux"
 import { useNavigate } from "react-router-dom"
 
 import Text from "UIComponents/Text"
-import styles from "./createInvoice.module.css"
+import * as  styles from "./createInvoice.module.css"
 import { TextColor, TextType } from "UIComponents/Text/Text"
 import Address from "UIComponents/Address"
 import ProductList from "components/ProductList"
@@ -133,7 +133,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
                         </Button>
                         <Text type={TextType.Title1}>New Invoice</Text>
                     </div>
-                    <div className={styles.headerRight}>
+                    <div>
                         <Button variant="outline" style={{ marginRight: "1rem" }} onClick={showPreviewHandler} type="button">Preview</Button>
                         <Button variant="default" style={{ marginRight: "1rem" }} onClick={saveToDraft} type="button">Save as draft</Button>
                         <Button variant="primary" style={{ marginRight: "1rem" }} onClick={() => { }} type="submit">Save and Continue</Button>

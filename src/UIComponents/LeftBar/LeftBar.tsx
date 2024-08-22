@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom"
-import styles from "./leftBar.module.css"
-import Icon from "UIComponents/Icon"
-import { IconName } from "UIComponents/Icon/iconType"
+import * as styles from "./leftBar.module.css"
 import { MdGroups3, MdOutlineDocumentScanner } from "react-icons/md";
 
 

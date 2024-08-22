@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { AnyAction } from "redux"
 import { ThunkDispatch } from "redux-thunk"
@@ -7,7 +7,7 @@ import { IoMdAdd } from "react-icons/io";
 
 import Widget from "UIComponents/Widget"
 import Text from "UIComponents/Text"
-import styles from "./invoiceDetails.module.css"
+import * as  styles from "./invoiceDetails.module.css"
 import { TextColor, TextType } from "UIComponents/Text/Text"
 import InvoiceList from "components/InvoiceList"
 import Button from "UIComponents/Button"
@@ -16,10 +16,11 @@ import { createNewInvoice, fetchInvoices, updateNewInvoice } from "store/actions
 import { Customer, Invoice } from "types/types"
 import Spinner from "UIComponents/Spinner"
 import Modal from "UIComponents/Modal"
-import AddCustomer from "components/AddCustomer"
 import Input from "UIComponents/Input"
 import { selectCustomer } from "store/actions/customerAction"
 import generateInvoiceNumber from "utils/invGenerator";
+
+const AddCustomerLazy = React.lazy(() => import("components/AddCustomer"))
 
 interface InvoiceListDetailsProps {
     onCreateInvoice: (payload: Invoice) => void,
@@ -79,10 +80,32 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
         setAllInvoices([...updatedInvoices])
     }, [invoices, drafts])
 
+    const handleFilterUpdate = (type: string) => {
+
+
+        let updatedInvoices: Invoice[] = []
+        if (invoices && invoices.length > 0) {
+            updatedInvoices = [...invoices]
+        }
+
+        if (drafts && drafts.length > 0) {
+            updatedInvoices = [...updatedInvoices, ...drafts]
+        }
+
+        let filteredInvoices = [...updatedInvoices]
+        if (type !== "all") {
+            filteredInvoices = updatedInvoices.filter(inv => inv.status?.toLocaleLowerCase() === type?.toLocaleLowerCase())
+        }
+        setAllInvoices(filteredInvoices)
+        setFilter(type)
+    }
+
     return (
         <>
             <Modal isOpen={showModal} onClose={() => { setShowModal(false) }}>
-                <AddCustomer afterCustomerAdd={handleCreateNewInvoice} />
+                <Suspense fallback={<Spinner />}>
+                    <AddCustomerLazy afterCustomerAdd={handleCreateNewInvoice} />
+                </Suspense>
             </Modal>
             <div className={styles.invoiceDetails}>
                 <div className={styles.invoiceDetailsTop}>
@@ -98,9 +121,7 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
                 {isLoading ? <Spinner /> : <div>
                     <div className={styles.widgets}>
                     </div>
-                    {allInvoices?.length == 0 ? <div className={styles.noData}>
-                        <Text type={TextType.Body2} color={TextColor.Info}>No data found</Text>
-                    </div> : <div className={styles.invoiceListDtails}>
+                    <div className={styles.invoiceListDtails}>
                         <div className={styles.invoiceListControl}>
                             <div className={styles.search}>
                                 <Input />
@@ -109,30 +130,37 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
                                 <div className={styles.invoiceTabs}>
                                     <button className={`${styles.invoiceTab} ${filter == "all" ? styles.activeTab : ""}`}
                                         onClick={() => {
-                                            setFilter("all")
+                                            handleFilterUpdate("all")
                                         }}
                                     >
                                         <Text type={TextType.Button2}>All Invoices</Text>
                                     </button>
                                     <button className={`${styles.invoiceTab} ${filter == "paid" ? styles.activeTab : ""}`}
                                         onClick={() => {
-                                            setFilter("paid")
+                                            handleFilterUpdate("paid")
                                         }}
                                     >
                                         <Text type={TextType.Button2}>Paid</Text>
                                     </button>
                                     <button className={`${styles.invoiceTab} ${filter == "draft" ? styles.activeTab : ""}`}
                                         onClick={() => {
-                                            setFilter("draft")
+                                            handleFilterUpdate("draft")
                                         }}
                                     >
                                         <Text type={TextType.Button2}>Draft</Text>
+                                    </button>
+                                    <button className={`${styles.invoiceTab} ${filter == "overdue" ? styles.activeTab : ""}`}
+                                        onClick={() => {
+                                            handleFilterUpdate("overdue")
+                                        }}
+                                    >
+                                        <Text type={TextType.Button2}>Overdue</Text>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <InvoiceList invoices={allInvoices} />
-                    </div>}
+                    </div>
                 </div>}
             </div >
         </>

@@ -1,7 +1,7 @@
 import Address from 'UIComponents/Address'
 import Spinner from 'UIComponents/Spinner'
 import Text from 'UIComponents/Text'
-import styles from "./customers.module.css"
+import * as  styles from "./customers.module.css"
 import { TextType } from 'UIComponents/Text/Text'
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
@@ -26,8 +26,8 @@ const Customers: React.FC<CustomerProps> = ({ customers, isLoading, onFetchCusto
     }, [])
 
     return (
-        <div className={styles.customerPage}>
-            <div className={styles.customer}>
+        <div>
+            <div>
                 <Text type={TextType.Title1}>Customers</Text>
                 {isLoading ? <Spinner /> : <div className={styles.customerContent}>
                     {customers?.map(customer => (

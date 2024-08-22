@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './input.module.css'; // Import the CSS module for styling
+import * as  styles from './input.module.css'; // Import the CSS module for styling
 
 interface InputProps {
     type?: string;

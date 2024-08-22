@@ -6,7 +6,6 @@ import './App.css';
 import "./theme/theme.css"
 import Layout from 'UIComponents/Layout';
 import { PersistGate } from 'redux-persist/integration/react';
-import Customers from 'pages/Customers';
 import { persistor } from 'store/store';
 import ProtectedRoute from 'routes';
 import { RootState } from 'store/reducers/rootReducer';

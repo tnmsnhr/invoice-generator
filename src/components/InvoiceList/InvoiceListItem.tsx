@@ -1,5 +1,5 @@
 import { Invoice } from "types/types";
-import styles from "./invoiceSummary.module.css"
+import * as  styles from "./invoiceSummary.module.css"
 import { formatDateToDDMMYYYY } from "utils/date";
 import Text from "UIComponents/Text";
 import { TextColor, TextType } from "UIComponents/Text/Text";
@@ -70,9 +70,6 @@ const InvoiceListItem: React.FC<InvoiceListItemProps> = ({ className, invoice, h
                     }} />
                 </td>
                 {showOptions && <div className={styles.optionContainer} ref={menuRef}>
-                    <div className={styles.option}>
-                        <Text type={TextType.CaptionBold}>Create Invoice</Text>
-                    </div>
                     <div
                         onClick={(e) => {
                             e.stopPropagation()
@@ -82,9 +79,6 @@ const InvoiceListItem: React.FC<InvoiceListItemProps> = ({ className, invoice, h
                         className={styles.option}
                     >
                         <Text type={TextType.CaptionBold} color={TextColor.Error}>Delete</Text>
-                    </div>
-                    <div className={styles.option}>
-                        <Text type={TextType.CaptionBold} >Modify</Text>
                     </div>
                 </div>}
             </tr>

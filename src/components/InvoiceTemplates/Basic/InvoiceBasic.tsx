@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./basic.module.css"
+import * as  styles from "./basic.module.css"
 import { Invoice } from 'types/types';
 import { formatDateToDDMMYYYY } from 'utils/date';
 

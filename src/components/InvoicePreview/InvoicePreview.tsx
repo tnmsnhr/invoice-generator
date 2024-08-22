@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import styles from "./invoicePreview.module.css"
+import * as  styles from "./invoicePreview.module.css"
 import { Invoice } from "types/types"
 import Text from "UIComponents/Text"
 import { TextType } from "UIComponents/Text/Text"

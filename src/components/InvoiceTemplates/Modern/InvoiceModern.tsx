@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./modern.module.css"
+import * as  styles from "./modern.module.css"
 import { Invoice } from 'types/types';
 
 interface InvoiceProps {

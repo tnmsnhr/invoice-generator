@@ -1,5 +1,5 @@
 import Text from "UIComponents/Text"
-import styles from "./address.module.css"
+import * as  styles from "./address.module.css"
 import { TextType } from "UIComponents/Text/Text"
 import { Customer } from "types/types"
 

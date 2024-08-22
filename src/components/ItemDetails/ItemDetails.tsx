@@ -1,4 +1,4 @@
-import styles from "./itemDetails.module.css"
+import * as  styles from "./itemDetails.module.css"
 
 const ItemDetails = () => {
     return (

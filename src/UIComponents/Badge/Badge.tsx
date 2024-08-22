@@ -1,5 +1,5 @@
 import Text from "UIComponents/Text"
-import styles from "./badge.module.css"
+import * as  styles from "./badge.module.css"
 import { TextType } from "UIComponents/Text/Text"
 
 interface BadgeProps {
