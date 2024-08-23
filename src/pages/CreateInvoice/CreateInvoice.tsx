@@ -60,21 +60,39 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
         onUpdateInvoice(invoice)
     }
 
-    const saveInvoice = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const validate = (e: React.FormEvent<HTMLFormElement>): boolean => {
         const invoiceDate = e.currentTarget.elements.namedItem("invoice-date") as HTMLInputElement
         const paymentDate = e.currentTarget.elements.namedItem("payment-date") as HTMLInputElement
 
         if (selectedInvoice?.itemsDetails?.length == 0) {
             addToast("error", "Please add one item at least")
-            return
+            return false
         }
 
         if (!invoiceDate?.value || !paymentDate?.value) {
             addToast("error", "InvoiceDate or Payment due date is missing")
+            return false
+        }
+
+        return true
+    }
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const submitter = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement).value
+
+        if (!validate(e)) {
             return
         }
 
+        if (submitter == "draft") {
+            saveToDraft()
+        } else if (submitter == "save") {
+            saveInvoice()
+        }
+    }
+
+    const saveInvoice = () => {
         setIsLoading(true)
         onSaveInvoice(selectedInvoice as Invoice)
             .then(() => {
@@ -103,6 +121,8 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
 
     const saveToDraft = () => {
         onSaveToDraft(selectedInvoice as Invoice)
+        addToast("success", "successfully saved to draft")
+        navigate("/")
     }
 
     const showPreviewHandler = () => {
@@ -111,14 +131,13 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
 
     const goBackHandler = () => {
         setShowModal(true)
-        // navigate(-1)
     }
 
     const updateHandler = debounce(updateInvoice, 300);
 
     return (
         <>
-            <form className={styles.createInvoice} onSubmit={(e) => saveInvoice(e)}>
+            <form className={styles.createInvoice} onSubmit={(e) => handleSubmit(e)}>
                 {isLoading && <div className="spinner">
                     <Spinner />
                 </div>}
@@ -134,9 +153,31 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
                         <Text type={TextType.Title1}>New Invoice</Text>
                     </div>
                     <div>
-                        <Button variant="outline" style={{ marginRight: "1rem" }} onClick={showPreviewHandler} type="button">Preview</Button>
-                        <Button variant="default" style={{ marginRight: "1rem" }} onClick={saveToDraft} type="button">Save as draft</Button>
-                        <Button variant="primary" style={{ marginRight: "1rem" }} onClick={() => { }} type="submit">Save and Continue</Button>
+                        <Button
+                            variant="outline"
+                            style={{ marginRight: "1rem" }}
+                            onClick={showPreviewHandler}
+                            type="button">
+                            Preview
+                        </Button>
+                        <Button
+                            variant="default-outline"
+                            style={{ marginRight: "1rem" }}
+                            name="action"
+                            value="draft"
+                            type="submit">
+                            Save as draft
+                        </Button>
+                        <Button
+                            variant="primary"
+                            style={{ marginRight: "1rem" }}
+                            onClick={() => { }}
+                            type="submit"
+                            name="action"
+                            value="save"
+                        >
+                            Save and Continue
+                        </Button>
                     </div>
                 </section>
                 <section className={styles.createInvoiceContent}>
@@ -208,42 +249,50 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
             {/* Modals */}
 
             <Modal isOpen={selectedDateType != null} onClose={() => { setSelectedDateType(null) }}>
-                <Text type={TextType.Title2} style={{ margin: "2rem" }}>
-                    {selectedDateType == "invoiceDate" ? "Select invoice date" : "Select payment due date"}
-                </Text>
-                <Suspense fallback={<Spinner />}>
-                    <CalendarLazy
-                        onChangeDate={dateUpdateHandler}
-                    />
-                </Suspense>
+                <Modal.Header>
+                    <Text type={TextType.Title2}>
+                        {selectedDateType == "invoiceDate" ? "Select invoice date" : "Select payment due date"}
+                    </Text>
+                </Modal.Header>
+                <Modal.Body>
+                    <Suspense fallback={<Spinner />}>
+                        <CalendarLazy
+                            onChangeDate={dateUpdateHandler}
+                        />
+                    </Suspense>
+                </Modal.Body>
             </Modal>
             <Modal isOpen={showPreview} onClose={() => { setShowPreview(false) }}>
-                <Suspense fallback={<Spinner />}>
-                    <InvoicePreviewLazy invoice={selectedInvoice} />
-                </Suspense>
+                <Modal.Body>
+                    <Suspense fallback={<Spinner />}>
+                        <InvoicePreviewLazy invoice={selectedInvoice} />
+                    </Suspense>
+                </Modal.Body>
             </Modal>
             <Modal isOpen={shoModal} onClose={() => { setShowModal(false) }}>
-                <div className={styles.goBackModal}>
-                    <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "1rem" }}>
-                        <FaInfoCircle size={24} style={{ color: "red", marginRight: "1rem" }} />
-                        <Text type={TextType.Title2}>
-                            Confirm
+                <Modal.Body>
+                    <div className={styles.goBackModal}>
+                        <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "1rem" }}>
+                            <FaInfoCircle size={24} style={{ color: "red", marginRight: "1rem" }} />
+                            <Text type={TextType.Title2}>
+                                Confirm
+                            </Text>
+                        </div>
+                        <Text type={TextType.Button2}>
+                            Any unsaved changes will be lost.
+                            Do you want to save them in drafts?
                         </Text>
+                        <div className={styles.modalButtons}>
+                            <Button variant="error" style={{ marginRight: "2rem" }} onClick={() => {
+                                navigate(-1)
+                            }}>Don't Save</Button>
+                            <Button variant="primary" onClick={() => {
+                                saveToDraft()
+                                navigate(-1)
+                            }}>Save as draft</Button>
+                        </div>
                     </div>
-                    <Text type={TextType.Button2}>
-                        Any unsaved changes will be lost.
-                        Do you want to save them in drafts?
-                    </Text>
-                    <div className={styles.modalButtons}>
-                        <Button variant="error" style={{ marginRight: "2rem" }} onClick={() => {
-                            navigate(-1)
-                        }}>Don't Save</Button>
-                        <Button variant="primary" onClick={() => {
-                            saveToDraft()
-                            navigate(-1)
-                        }}>Save as draft</Button>
-                    </div>
-                </div>
+                </Modal.Body>
             </Modal>
         </>
     )

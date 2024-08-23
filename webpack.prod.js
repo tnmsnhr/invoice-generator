@@ -12,8 +12,9 @@ module.exports = merge(common, {
     mode: 'production',
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].[contenthash].js',
+        chunkFilename: '[name].[contenthash].js',
     },
     optimization: {
         minimize: true,

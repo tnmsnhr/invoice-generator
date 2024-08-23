@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import * as  styles from "./invoiceList.module.css"
 import InvoiceListItem from './InvoiceListItem'
 import { Invoice } from "types/types";
 import Text, { TextColor, TextType } from "UIComponents/Text/Text";
 import { connect, useDispatch } from "react-redux";
 import Modal from "UIComponents/Modal";
-import InvoicePreview from "components/InvoicePreview";
-import { deleteInvoice, deleteInvoiceFromDraft, fetchInvoices, updateInvoice } from "store/actions/invoiceListActions";
+import { deleteInvoice, deleteInvoiceFromDraft, fetchInvoices, saveInvoice, updateInvoice } from "store/actions/invoiceListActions";
 import { RootState } from "store/reducers/rootReducer";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import Spinner from "UIComponents/Spinner";
 import Button from "UIComponents/Button";
 
+const InvoicePreviewLazy = React.lazy(() => import("components/InvoicePreview"))
+
 interface InvoiceListProps {
     invoices?: Invoice[];
     onDeleteInvoice?: <T>(id: string) => Promise<T>;
     onUpdateInvoice?: <T>(invoice: Invoice) => Promise<T>;
+    onSaveInvoice?: <T>(invoice: Invoice) => Promise<T>;
     onFetchInvoices: () => void,
 }
 
-const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, onUpdateInvoice, onFetchInvoices }) => {
+const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, onUpdateInvoice, onFetchInvoices, onSaveInvoice }) => {
     const [invoiceList, setInvoiceList] = useState<Invoice[] | undefined>([])
     const [showPreview, setShowPreview] = useState<boolean>(false)
     const [invoiceData, setInvoiceData] = useState<Invoice | undefined>()
@@ -58,15 +60,25 @@ const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, on
     }
 
     const invoiceUpdateHandler = async (type: string) => {
-
         const updatedInvoiceData = { ...invoiceData }
-        updatedInvoiceData.status = type
-        if (onUpdateInvoice && updatedInvoiceData) {
-            setIsLoading(true)
-            await onUpdateInvoice(updatedInvoiceData as Invoice)
-            setInvoiceData(updatedInvoiceData as Invoice)
-            onFetchInvoices()
+        if (updatedInvoiceData?.status == "draft" && onSaveInvoice) {
+            updatedInvoiceData.status = type
+            try {
+                await onSaveInvoice(updatedInvoiceData as Invoice)
+                dispatch(deleteInvoiceFromDraft(updatedInvoiceData.id as string))
+            } catch (error) {
+
+            }
+        } else {
+            if (onUpdateInvoice && updatedInvoiceData) {
+                updatedInvoiceData.status = type
+                setIsLoading(true)
+                await onUpdateInvoice(updatedInvoiceData as Invoice)
+                setInvoiceData(updatedInvoiceData as Invoice)
+                onFetchInvoices()
+            }
         }
+
     }
 
     return (
@@ -99,24 +111,34 @@ const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, on
             }
 
             <Modal isOpen={showPreview} onClose={handlePreviewClose}>
-                <div>
-                    <InvoicePreview invoice={invoiceData} />
-                    <div className={styles.invoicePreviewFooter}>
-                        <Text type={TextType.SubtitleBold}>Change Status</Text>
+                <Modal.Header>
+                    <div className={styles.statusControl}>
+                        <Text type={TextType.SubtitleBold}>Mark as: </Text>
                         <div className={styles.buttonControl}>
                             <Button variant="error"
                                 onClick={() => {
                                     invoiceUpdateHandler("overdue")
-                                }}
-                            > Overdue</Button>
+                                }}>
+                                Overdue
+                            </Button>
                             <Button variant="primary-success"
                                 onClick={() => {
                                     invoiceUpdateHandler("paid")
                                 }}
-                            > Paid</Button>
+                            >
+                                Paid
+                            </Button>
                         </div>
                     </div>
-                </div>
+                </Modal.Header>
+                <Modal.Body>
+                    <div>
+                        <Suspense fallback={<Spinner />}>
+                            <InvoicePreviewLazy invoice={invoiceData} />
+                        </Suspense>
+
+                    </div>
+                </Modal.Body>
             </Modal>
         </div>
     )
@@ -127,6 +149,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, AnyAction>)
         onDeleteInvoice: (id: string): Promise<Invoice> => dispatch(deleteInvoice(id)),
         onUpdateInvoice: (invoice: Invoice): Promise<Invoice> => dispatch(updateInvoice(invoice)),
         onFetchInvoices: () => dispatch(fetchInvoices()),
+        onSaveInvoice: (payload: Invoice): Promise<Invoice> => dispatch(saveInvoice(payload)),
     }
 }
 

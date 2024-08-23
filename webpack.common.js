@@ -3,10 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.tsx',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-    },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
         modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -27,25 +23,25 @@ module.exports = {
                 test: /\.svg$/,
                 use: ['@svgr/webpack'],
             },
-            {
-                test: /\.module\.css$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: {
-                                localIdentName: '[name]__[local]___[hash:base64:5]',
-                            },
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.css$/,
-                exclude: /\.module\.css$/,
-                use: ['style-loader', 'css-loader'],
-            },
+            // {
+            //     test: /\.module\.css$/,
+            //     use: [
+            //         'style-loader',
+            //         {
+            //             loader: 'css-loader',
+            //             options: {
+            //                 modules: {
+            //                     localIdentName: '[name]__[local]___[hash:base64:5]',
+            //                 },
+            //             },
+            //         },
+            //     ],
+            // },
+            // {
+            //     test: /\.css$/,
+            //     exclude: /\.module\.css$/,
+            //     use: ['style-loader', 'css-loader'],
+            // },
         ],
     },
     plugins: [

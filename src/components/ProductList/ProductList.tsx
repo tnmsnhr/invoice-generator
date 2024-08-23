@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
+
 import ProductItem from "components/ProductItem"
 import * as  styles from "./productList.module.css"
 import Text from "UIComponents/Text"
@@ -90,17 +92,28 @@ const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoic
             </div>
 
             <div className={styles.productLists}>
-                {invoice?.itemsDetails?.map((el, index) => <ProductItem
-                    key={el.id}
-                    data={el}
-                    index={index}
-                    onChangeFieldValue={onChangeFieldValue}
-                    deleteProduct={deleteProduct}
-                />)}
+                <AnimatePresence>
+                    {invoice?.itemsDetails?.map((el, index) => <motion.div
+                        key={el.id}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        style={{ overflow: 'hidden' }}
+                    >
+                        <ProductItem
+                            data={el}
+                            index={index}
+                            onChangeFieldValue={onChangeFieldValue}
+                            deleteProduct={deleteProduct}
+                        />
+                    </motion.div>)}
+                </AnimatePresence>
             </div>
             <Button
                 className={`align-center ${styles.itemAddButton}`}
                 onClick={handleAddItem}
+                variant="outline"
                 type="button"
             >Add an item
                 <IoMdAdd size={24} style={{

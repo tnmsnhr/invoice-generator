@@ -7,7 +7,6 @@ interface InvoiceProps {
 }
 
 const InvoiceModernMinimal: React.FC<InvoiceProps> = ({ invoice }) => {
-    console.log(invoice)
     return (
         <div className={styles.invoice}>
             <header className={styles.header}>
@@ -44,8 +43,8 @@ const InvoiceModernMinimal: React.FC<InvoiceProps> = ({ invoice }) => {
                             <td>{index + 1}</td>
                             <td>{item?.name}</td>
                             <td>{item?.quantity}</td>
-                            <td>${item?.discount}</td>
                             <td>${item?.price}</td>
+                            <td>${item?.discount}</td>
                             <td>${item?.price * item?.quantity - item?.discount}</td>
                         </tr>
                     ))}
@@ -54,11 +53,7 @@ const InvoiceModernMinimal: React.FC<InvoiceProps> = ({ invoice }) => {
                 <tfoot>
                     <tr>
                         <td colSpan={5}>Sub Total</td>
-                        <td>$7,950</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={5}>Tax 10%</td>
-                        <td>$795</td>
+                        <td>${invoice?.total}</td>
                     </tr>
                     <tr>
                         <td colSpan={5}>Discount</td>
@@ -67,7 +62,7 @@ const InvoiceModernMinimal: React.FC<InvoiceProps> = ({ invoice }) => {
 
                     <tr>
                         <td colSpan={5} className={styles.grandTotalLabel}>GRAND TOTAL</td>
-                        <td className={styles.grandTotal}>$8,245</td>
+                        <td className={styles.grandTotal}>${invoice?.total}</td>
                     </tr>
                 </tfoot>
             </table>

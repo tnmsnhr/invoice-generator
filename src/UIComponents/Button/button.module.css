@@ -45,7 +45,7 @@ button {
 }
 
 .default {
-    background-color: var(--secondary-color);
+    background-color: red;
     color: var(--primary-color);
 }
 

@@ -1,5 +1,5 @@
 .customerContent {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
 }
 
 .customerItem {
@@ -7,4 +7,28 @@
     padding: 1.5rem;
     background-color: var(--grey);
     border-radius: 2rem;
+}
+
+.cutomerHeader {
+    background-color: #fff;
+    width: 100%;
+    /* position: sticky; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.customerLists {
+    /* background-color: red; */
+    /* margin-top: 100px; */
+}
+
+.spinner {
+    background-color: rgba(255, 255, 255, 0.555);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

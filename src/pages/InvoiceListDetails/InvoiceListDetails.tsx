@@ -81,8 +81,6 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
     }, [invoices, drafts])
 
     const handleFilterUpdate = (type: string) => {
-
-
         let updatedInvoices: Invoice[] = []
         if (invoices && invoices.length > 0) {
             updatedInvoices = [...invoices]
@@ -103,9 +101,14 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
     return (
         <>
             <Modal isOpen={showModal} onClose={() => { setShowModal(false) }}>
-                <Suspense fallback={<Spinner />}>
-                    <AddCustomerLazy afterCustomerAdd={handleCreateNewInvoice} />
-                </Suspense>
+                <Modal.Header>
+                    <Text type={TextType.Title3}>Select a Customer</Text>
+                </Modal.Header>
+                <Modal.Body>
+                    <Suspense fallback={<Spinner />}>
+                        <AddCustomerLazy afterCustomerAdd={handleCreateNewInvoice} />
+                    </Suspense>
+                </Modal.Body>
             </Modal>
             <div className={styles.invoiceDetails}>
                 <div className={styles.invoiceDetailsTop}>
@@ -123,9 +126,6 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
                     </div>
                     <div className={styles.invoiceListDtails}>
                         <div className={styles.invoiceListControl}>
-                            <div className={styles.search}>
-                                <Input />
-                            </div>
                             <div>
                                 <div className={styles.invoiceTabs}>
                                     <button className={`${styles.invoiceTab} ${filter == "all" ? styles.activeTab : ""}`}

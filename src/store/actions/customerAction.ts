@@ -1,9 +1,12 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { addCustomer, getCustomers } from 'services/customerSerives';
+import { addCustomer, deleteCustomer, getCustomers } from 'services/customerSerives';
 import { RootState } from 'store/reducers/rootReducer';
 import {
     CUSTOMER_SELECTED,
+    DELETE_CUSTOMER_FAILURE,
+    DELETE_CUSTOMER_REQUEST,
+    DELETE_CUSTOMER_SUCCESS,
     FETCH_CUSTOMERS_FAILURE,
     FETCH_CUSTOMERS_REQUEST,
     FETCH_CUSTOMERS_SUCCESS,
@@ -78,6 +81,35 @@ export const saveCustomer = (data: Customer): ThunkAction<Promise<Customer>, Roo
             return savedCustomer
         } catch (error: any) {
             dispatch(saveCustomerFailure(error?.message))
+            return Promise.reject(error)
+        }
+    }
+}
+
+const deleteCustomerRequest = () => ({
+    type: DELETE_CUSTOMER_REQUEST
+})
+
+const deleteCustomerSuccess = (payload: string) => ({
+    type: DELETE_CUSTOMER_SUCCESS,
+    payload
+})
+
+const deleteCustomerFailure = (payload: String) => ({
+    type: DELETE_CUSTOMER_FAILURE,
+    payload
+})
+
+export const deleteCustomerAction = (id: string): ThunkAction<Promise<Customer>, RootState, unknown, Action<string>> => {
+    // @ts-ignore
+    return async (dispatch: Dispatch) => {
+        dispatch(deleteCustomerRequest())
+        try {
+            const deletedCustomer = await deleteCustomer(id)
+            dispatch(deleteCustomerSuccess(id))
+            return deletedCustomer
+        } catch (error: any) {
+            dispatch(deleteCustomerFailure(error?.message))
             return Promise.reject(error)
         }
     }

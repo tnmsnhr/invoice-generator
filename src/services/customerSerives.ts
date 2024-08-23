@@ -1,6 +1,7 @@
 import { Customer, Invoice } from 'types/types';
 import { firestore } from './firebase';
 import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, where, query } from 'firebase/firestore';
+import { deleteDocument } from './firestoreService';
 
 export const addCustomer = async (document: any) => {
     try {
@@ -8,6 +9,15 @@ export const addCustomer = async (document: any) => {
         return docRef.id;
     } catch (error) {
         console.error("Error adding document: ", error);
+        throw error;
+    }
+};
+
+export const deleteCustomer = async (id: string) => {
+    try {
+        await deleteDocument("customers", id);
+    } catch (error) {
+        console.error("Error deleting documents: ", error);
         throw error;
     }
 };

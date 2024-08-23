@@ -28,6 +28,7 @@
     max-height: 100%;
     overflow-y: auto;
     border-radius: 2rem;
+    background-color: #fff;
 }
 
 .modalCloseButton {
@@ -48,6 +49,15 @@
 }
 
 .modalBody {
-    background-color: #fff;
     overflow: hidden;
+    padding: 2rem;
+}
+
+.modalHeader {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.modalFooter {
+    padding: 1rem 2rem;
 }

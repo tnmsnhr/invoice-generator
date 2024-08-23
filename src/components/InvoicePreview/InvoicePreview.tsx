@@ -31,10 +31,10 @@ const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice }) => {
     }
     return (
         <>
-            <Text type={TextType.Title2} style={{ margin: "2rem" }}>
+            <Text type={TextType.Title2} style={{ marginBottom: "1rem" }}>
                 Preview:
             </Text>
-            <div className={styles.invoicePreview}>
+            <div>
                 <div className={styles.templates}>
                     <div className={`${styles.templateName} ${template == "basic" && styles.active}`} onClick={() => {
                         handleChangeTemplate("basic")

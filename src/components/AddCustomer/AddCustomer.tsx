@@ -93,10 +93,7 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ onSaveCustomer, selectedCusto
             onSelectCustomer(null)
     }
 
-    // const updateHandler = debounce(onChangeCustomerData, 300);
     const searchCustomer = debounce(searchCustomerHandler, 500);
-
-    console.log(Object.keys(customer ?? {}).length)
 
     return (
         <div className={styles.addCustomer} onClick={() => {
@@ -105,10 +102,7 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ onSaveCustomer, selectedCusto
             {isLoading && <div className="spinner">
                 <Spinner />
             </div>}
-            <div className={styles.customerHeader}>
-                <Text type={TextType.Title3}>Select a Customer</Text>
-            </div>
-            <div className={styles.customerContent}>
+            <div>
                 <Text type={TextType.Subtitle} color={TextColor.Secondary}>Search for existing customer:</Text>
                 <Input
                     style={{ marginTop: "1rem" }}
@@ -131,7 +125,7 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ onSaveCustomer, selectedCusto
                         Object.keys(customer ?? {}).length > 0 ?
                             <div className={styles.customerPreview}>
                                 <Address data={customer as Customer} style={{ textAlign: "left", flex: 1 }} />
-                                <Button variant="error" onClick={deleteCustomerHandler}>Delete</Button>
+                                <Button variant="error" onClick={deleteCustomerHandler}>Deselect</Button>
                             </div> :
                             <Button
                                 className="align-center"
@@ -189,7 +183,7 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ onSaveCustomer, selectedCusto
                 </div>
             </div>
             <div className={styles.customerFooter}>
-                <Button variant="primary" onClick={nextStepHandler} disabled={!customer}>Proceed</Button>
+                <Button variant="primary" onClick={nextStepHandler} disabled={!customer}>Create Invoice</Button>
             </div>
         </div >
     )

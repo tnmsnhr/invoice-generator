@@ -2,17 +2,6 @@
     position: relative;
 }
 
-.customerHeader {
-    padding: 1.5rem;
-    border-bottom: 1px solid #d9d9d9;
-    background-color: #f5f7fe;
-}
-
-.customerContent {
-    padding: 2rem 1rem;
-    position: relative;
-}
-
 .customerSuggestions {
     background-color: #fff;
     border-radius: 1rem;

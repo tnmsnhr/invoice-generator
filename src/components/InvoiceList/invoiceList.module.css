@@ -41,12 +41,15 @@
 
 /*  */
 
-.invoicePreviewFooter {
-    padding: 2rem;
+.statusControl {
+    display: flex;
+    align-items: center;
 }
 
 .buttonControl {
-    margin-top: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .buttonControl button:not(:last-child) {

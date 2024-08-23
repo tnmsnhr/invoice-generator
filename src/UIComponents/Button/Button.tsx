@@ -8,7 +8,9 @@ interface ButtonProps {
     className?: string;
     style?: React.CSSProperties;
     disabled?: boolean;
-    type?: "button" | "submit" | "reset" | undefined
+    type?: "button" | "submit" | "reset" | undefined,
+    name?: string,
+    value?: string
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,14 +20,18 @@ const Button: React.FC<ButtonProps> = ({
     className,
     style,
     disabled = false,
-    type
+    type,
+    name,
+    value
 }) => {
     return (
         <button
             type={type}
             onClick={onClick}
-            className={`${styles.button} ${styles[variant]} ${className || ''}`}
+            className={`${styles.button} ${styles?.[variant]} ${className || ''}`}
             style={style}
+            name={name}
+            value={value}
             disabled={disabled}
         >
             {children}
