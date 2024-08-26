@@ -106,7 +106,7 @@ const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, on
                         </React.Fragment>)}
                     </tbody>
                 </table> : <div className={styles.noData}>
-                    <Text type={TextType.Body2} color={TextColor.Info}>No data found</Text>
+                    <Text type={TextType.Body2} color={TextColor.Info} data-testid="no-data">No data found</Text>
                 </div>
             }
 

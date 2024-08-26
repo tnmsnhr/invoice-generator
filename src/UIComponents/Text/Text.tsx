@@ -31,10 +31,10 @@ interface TextProps {
     color?: TextColor;
     children: React.ReactNode;
     style?: React.CSSProperties;
-    className?: string
+    className?: string,
 }
 
-const Text: React.FC<TextProps> = ({ type, color = TextColor.Primary, children, style, className }) => {
+const Text: React.FC<TextProps> = ({ type, color = TextColor.Primary, children, style, className, ...props }) => {
 
     const tagMap: Record<TextType, keyof JSX.IntrinsicElements> = {
         [TextType.Title1]: 'h1',
@@ -66,7 +66,7 @@ const Text: React.FC<TextProps> = ({ type, color = TextColor.Primary, children, 
 
 
     return (
-        <Tag className={`text ${type} ${className}`} style={{ color: resolvedColor, ...style }}>
+        <Tag className={`text ${type} ${className}`} style={{ color: resolvedColor, ...style }} {...props}>
             {children}
         </Tag>
     )

@@ -98,7 +98,14 @@ const ProductItem: React.FC<ProductItemProps> = ({ data, index, onChangeFieldVal
                     ${(data?.quantity * data?.price - data?.discount)?.toFixed(2)}
                 </div>
                 <div className="cell">
-                    <Button type="button" variant="ghost" className={styles.delete} onClick={() => deleteProduct(index)}>X</Button>
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        className={styles.delete}
+                        onClick={() => deleteProduct(index)}
+                        data-testid="delete-item">
+                        X
+                    </Button>
                 </div>
             </div>
         </>

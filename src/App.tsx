@@ -11,6 +11,7 @@ import ProtectedRoute from 'routes';
 import { RootState } from 'store/reducers/rootReducer';
 import { Customer } from 'types/types';
 import Spinner from 'UIComponents/Spinner';
+import ErrorBoundary from 'HOC/ErrorBoundary';
 
 const CreateInvoiceLazy = lazy(() => import('pages/CreateInvoice'))
 const InvoiceListDetailsLazy = lazy(() => import('pages/InvoiceListDetails'))
@@ -24,26 +25,34 @@ const App: React.FC<AppProps> = ({ selectedCustomer }) => {
   return (
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
-        <Suspense fallback={<Spinner />}>
-          <Routes>
-            <Route path="/create-invoice" element={
-              <ProtectedRoute isAllowed={!!selectedCustomer}>
-                <CreateInvoiceLazy />
-              </ProtectedRoute>
-            } />
-          </Routes>
+        <ErrorBoundary>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route path="/create-invoice" element={
+                <ProtectedRoute isAllowed={!!selectedCustomer}>
+                  <ErrorBoundary>
+                    <CreateInvoiceLazy />
+                  </ErrorBoundary>
+                </ProtectedRoute>
+              } />
+            </Routes>
 
-          <Routes>
-            <Route path="/customers" element={
-              <Layout>
-                <CustomersLazy />
-              </Layout>
-            } />
-            <Route path="/" element={<Layout>
-              <InvoiceListDetailsLazy />
-            </Layout>} />
-          </Routes>
-        </Suspense>
+            <Routes>
+              <Route path="/customers" element={
+                <Layout>
+                  <ErrorBoundary>
+                    <CustomersLazy />
+                  </ErrorBoundary>
+                </Layout>
+              } />
+              <Route path="/" element={<Layout>
+                <ErrorBoundary>
+                  <InvoiceListDetailsLazy />
+                </ErrorBoundary>
+              </Layout>} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </BrowserRouter>
     </PersistGate>
   );

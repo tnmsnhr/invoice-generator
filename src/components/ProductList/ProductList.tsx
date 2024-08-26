@@ -8,6 +8,7 @@ import Button from "UIComponents/Button"
 import { Invoice, Product } from "types/types"
 import React, { useEffect, useState } from "react"
 import { IoMdAdd } from "react-icons/io"
+import { ProductFactory } from 'factories/ProductFactory';
 
 interface ProductListProps {
     invoice: Invoice | null,
@@ -22,13 +23,9 @@ const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoic
 
     const handleAddItem = () => {
         const updatedInvoiceDetails = { ...invoiceDetails }
-        const newProduct: Product = {
-            discount: 0,
-            id: Date.now().toString(),
-            name: "",
-            price: 0,
-            quantity: 1
-        }
+
+        const newProduct = ProductFactory.create()
+
         updatedInvoiceDetails?.itemsDetails?.push(newProduct)
         setInvoiceDetails(updatedInvoiceDetails as Invoice)
         updateSelectedInvoice(updatedInvoiceDetails as Invoice)
@@ -115,6 +112,7 @@ const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoic
                 onClick={handleAddItem}
                 variant="outline"
                 type="button"
+                data-testid={"add-item"}
             >Add an item
                 <IoMdAdd size={24} style={{
                     marginLeft: "0.5rem"

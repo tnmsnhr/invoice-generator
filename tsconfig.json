@@ -9,11 +9,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": false,
-    "baseUrl": "./src", // This allows for absolute imports from the src directory
+    "baseUrl": "./src",
     "paths": {
       "*": [
         "*"
-      ] // Optional: Maps any path from the src directory
+      ]
     }
   },
   "include": [

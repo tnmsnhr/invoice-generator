@@ -4,11 +4,9 @@ import { AnyAction } from "redux"
 import { ThunkDispatch } from "redux-thunk"
 import { IoMdAdd } from "react-icons/io";
 
-
-import Widget from "UIComponents/Widget"
 import Text from "UIComponents/Text"
 import * as  styles from "./invoiceDetails.module.css"
-import { TextColor, TextType } from "UIComponents/Text/Text"
+import { TextType } from "UIComponents/Text/Text"
 import InvoiceList from "components/InvoiceList"
 import Button from "UIComponents/Button"
 import { RootState } from "store/reducers/rootReducer"
@@ -16,9 +14,9 @@ import { createNewInvoice, fetchInvoices, updateNewInvoice } from "store/actions
 import { Customer, Invoice } from "types/types"
 import Spinner from "UIComponents/Spinner"
 import Modal from "UIComponents/Modal"
-import Input from "UIComponents/Input"
 import { selectCustomer } from "store/actions/customerAction"
 import generateInvoiceNumber from "utils/invGenerator";
+import { InvoiceFactory } from "factories/InvoiceFactory";
 
 const AddCustomerLazy = React.lazy(() => import("components/AddCustomer"))
 
@@ -47,18 +45,7 @@ const InvoiceListDetails: React.FC<InvoiceListDetailsProps> = ({
     const [filter, setFilter] = useState<string>("all")
 
     const handleCreateNewInvoice = (customer: Customer) => {
-        const newInvoice: Invoice = {
-            billingTo: customer,
-            CGST: 18,
-            SGST: 18,
-            itemsDetails: [],
-            total: 0,
-            id: Date.now().toString(),
-            invoiceDate: "",
-            paymentDueDate: "",
-            status: "draft",
-            invoiceNumber: generateInvoiceNumber()
-        }
+        const newInvoice = InvoiceFactory.create(customer)
         onCreateInvoice(newInvoice)
     }
 

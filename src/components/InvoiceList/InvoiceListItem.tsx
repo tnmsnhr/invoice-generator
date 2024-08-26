@@ -60,8 +60,8 @@ const InvoiceListItem: React.FC<InvoiceListItemProps> = ({ className, invoice, h
                         <Text type={TextType.Body1} color={TextColor.Primary}>{formatDateToDDMMYYYY(+invoice?.paymentDueDate)}</Text>}
                 </td>
                 <td><Text type={TextType.Body1} color={TextColor.Primary}>${invoice?.total}</Text></td>
-                <td><Text type={TextType.Body1} color={TextColor.Primary}>#{invoice?.invoiceNumber}</Text></td>
-                <td><Text type={TextType.Body1} color={TextColor.Primary}>{invoice?.billingTo?.name}</Text></td>
+                <td><Text type={TextType.Body1} color={TextColor.Primary} data-testid="invoiceNumber">#{invoice?.invoiceNumber}</Text></td>
+                <td><Text type={TextType.Body1} color={TextColor.Primary} data-testid="name">{invoice?.billingTo?.name}</Text></td>
                 <td><Text type={TextType.Body1} color={TextColor.Primary}>{invoice?.itemsDetails?.length}</Text></td>
                 <td>
                     <KebabButton onClick={(e) => {

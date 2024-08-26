@@ -7,5 +7,6 @@ export enum IconName {
     Customer = "customer",
     Calendar = "calendar",
     Eye = "eye",
+    Info = "info",
 }
 

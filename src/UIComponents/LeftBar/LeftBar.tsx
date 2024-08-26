@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom"
 import * as styles from "./leftBar.module.css"
-import { MdGroups3, MdOutlineDocumentScanner } from "react-icons/md";
+import { MdGroups3 } from "react-icons/md";
+import Icon from "UIComponents/Icon";
+import { IconName } from "UIComponents/Icon/iconType";
 
 
 const LeftBar = () => {
@@ -9,12 +11,20 @@ const LeftBar = () => {
             <ul className={styles.sidebarList}>
                 <li className={styles.sidebarListitem}>
                     <NavLink
-                        to="/" className={({ isActive }) =>
+                        to="/"
+                        className={({ isActive }) =>
                             isActive || window.location.pathname === '/create-invoice' ? 'activated' : ''
-                        }><MdOutlineDocumentScanner size={24} /></NavLink>
+                        }>
+                        <Icon name={IconName.Document} size={24} />
+                    </NavLink>
                 </li>
                 <li className={styles.sidebarListitem}>
-                    <NavLink to="/customers" className={({ isActive }) => (isActive ? "activated" : "")}><MdGroups3 size={24} /></NavLink></li>
+                    <NavLink
+                        to="/customers"
+                        className={({ isActive }) => (isActive ? "activated" : "")}>
+                        <Icon name={IconName.Customer} size={24} />
+                    </NavLink>
+                </li>
             </ul>
         </aside>
     )

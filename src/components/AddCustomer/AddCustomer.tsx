@@ -103,7 +103,7 @@ const AddCustomer: React.FC<AddCustomerProps> = ({ onSaveCustomer, selectedCusto
                 <Spinner />
             </div>}
             <div>
-                <Text type={TextType.Subtitle} color={TextColor.Secondary}>Search for existing customer:</Text>
+                <Text type={TextType.Subtitle} color={TextColor.Secondary} data-testid={"search_customer_label"}>Search for existing customer:</Text>
                 <Input
                     style={{ marginTop: "1rem" }}
                     placeholder="Search Customer"

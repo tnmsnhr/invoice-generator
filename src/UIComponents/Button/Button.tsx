@@ -22,17 +22,19 @@ const Button: React.FC<ButtonProps> = ({
     disabled = false,
     type,
     name,
-    value
+    value,
+    ...props
 }) => {
     return (
         <button
             type={type}
             onClick={onClick}
-            className={`${styles.button} ${styles?.[variant]} ${className || ''}`}
+            className={`${styles.button} ${styles[variant]} ${className || ''}`}
             style={style}
             name={name}
             value={value}
             disabled={disabled}
+            {...props}
         >
             {children}
         </button>

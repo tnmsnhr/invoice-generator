@@ -20,7 +20,7 @@ import Modal from "UIComponents/Modal"
 import { formatDateToDDMMYYYY } from "utils/date"
 import Spinner from "UIComponents/Spinner"
 import { useToast } from "contexts/ToastContext"
-import { FaChevronLeft, FaInfoCircle } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
 
 const CalendarLazy = lazy(() => import("UIComponents/Calendar"))
 const InvoicePreviewLazy = lazy(() => import("components/InvoicePreview"))
@@ -148,7 +148,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
                             variant="ghost"
                             style={{ marginRight: "1rem", display: "flex" }}
                             type="button">
-                            <FaChevronLeft size={24} />
+                            <Icon name={IconName.ChevronLeft} />
                         </Button>
                         <Text type={TextType.Title1}>New Invoice</Text>
                     </div>
@@ -273,7 +273,7 @@ const CreateInvoice: React.FC<CreateInvoiceProps> = ({ selectedInvoice, onUpdate
                 <Modal.Body>
                     <div className={styles.goBackModal}>
                         <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "1rem" }}>
-                            <FaInfoCircle size={24} style={{ color: "red", marginRight: "1rem" }} />
+                            <Icon name={IconName.Info} size={24} style={{ color: "red", marginRight: "1rem" }} />
                             <Text type={TextType.Title2}>
                                 Confirm
                             </Text>

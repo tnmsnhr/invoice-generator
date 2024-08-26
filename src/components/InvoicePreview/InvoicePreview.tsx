@@ -31,7 +31,7 @@ const InvoicePreview: React.FC<InvoicePreviewProps> = ({ invoice }) => {
     }
     return (
         <>
-            <Text type={TextType.Title2} style={{ marginBottom: "1rem" }}>
+            <Text type={TextType.Title2} style={{ marginBottom: "1rem" }} data-testid="modal">
                 Preview:
             </Text>
             <div>
