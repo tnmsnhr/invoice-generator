@@ -17,7 +17,7 @@ interface ProductListProps {
 
 type ProductKey = keyof Product;
 
-const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoice }) => {
+const ProductList: React.FC<ProductListProps> = React.memo(({ invoice, updateSelectedInvoice }) => {
 
     const [invoiceDetails, setInvoiceDetails] = useState<Invoice>()
 
@@ -120,6 +120,5 @@ const ProductList: React.FC<ProductListProps> = ({ invoice, updateSelectedInvoic
             </Button>
         </div>
     )
-}
-
+})
 export default ProductList

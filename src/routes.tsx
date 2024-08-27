@@ -18,7 +18,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ isAllowed, redirectPath
     }, [isAllowed, navigate, redirectPath]);
 
     if (!isAllowed) {
-        return null; // or you can show a loading indicator if needed
+        return null;
     }
 
     return children ? <>{children}</> : <Outlet />;

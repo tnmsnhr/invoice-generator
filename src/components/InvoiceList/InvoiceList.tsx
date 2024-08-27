@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useCallback, useEffect, useState } from "react"
 import * as  styles from "./invoiceList.module.css"
 import InvoiceListItem from './InvoiceListItem'
 import { Invoice } from "types/types";
@@ -44,7 +44,7 @@ const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, on
         setInvoiceData(undefined)
     }
 
-    const deleteInvoiceHandler = async (id: string, type: string) => {
+    const deleteInvoiceHandler = useCallback(async (id: string, type: string) => {
         if (type?.toLocaleLowerCase() == "draft") {
             dispatch(deleteInvoiceFromDraft(id))
         } else if (onDeleteInvoice) {
@@ -57,7 +57,7 @@ const InvoiceList: React.FC<InvoiceListProps> = ({ invoices, onDeleteInvoice, on
                 setIsLoading(false)
             }
         }
-    }
+    }, [])
 
     const invoiceUpdateHandler = async (type: string) => {
         const updatedInvoiceData = { ...invoiceData }

@@ -1,6 +1,6 @@
 import { ThunkDispatch } from "redux-thunk"
 import { connect } from "react-redux"
-import React, { useState, lazy, Suspense } from "react"
+import React, { useState, lazy, Suspense, useCallback } from "react"
 import { AnyAction } from "redux"
 import { useNavigate } from "react-router-dom"
 
@@ -20,7 +20,6 @@ import Modal from "UIComponents/Modal"
 import { formatDateToDDMMYYYY } from "utils/date"
 import Spinner from "UIComponents/Spinner"
 import { useToast } from "contexts/ToastContext"
-import { FaInfoCircle } from "react-icons/fa";
 
 const CalendarLazy = lazy(() => import("UIComponents/Calendar"))
 const InvoicePreviewLazy = lazy(() => import("components/InvoicePreview"))

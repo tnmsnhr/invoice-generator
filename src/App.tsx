@@ -12,6 +12,7 @@ import { RootState } from 'store/reducers/rootReducer';
 import { Customer } from 'types/types';
 import Spinner from 'UIComponents/Spinner';
 import ErrorBoundary from 'HOC/ErrorBoundary';
+import NotFound from 'pages/NotFound';
 
 const CreateInvoiceLazy = lazy(() => import('pages/CreateInvoice'))
 const InvoiceListDetailsLazy = lazy(() => import('pages/InvoiceListDetails'))
@@ -28,7 +29,7 @@ const App: React.FC<AppProps> = ({ selectedCustomer }) => {
         <ErrorBoundary>
           <Suspense fallback={<Spinner />}>
             <Routes>
-              <Route path="/create-invoice" element={
+              <Route path="/create-invoice/*" element={
                 <ProtectedRoute isAllowed={!!selectedCustomer}>
                   <ErrorBoundary>
                     <CreateInvoiceLazy />
@@ -38,7 +39,7 @@ const App: React.FC<AppProps> = ({ selectedCustomer }) => {
             </Routes>
 
             <Routes>
-              <Route path="/customers" element={
+              <Route path="/customers/*" element={
                 <Layout>
                   <ErrorBoundary>
                     <CustomersLazy />
@@ -48,6 +49,11 @@ const App: React.FC<AppProps> = ({ selectedCustomer }) => {
               <Route path="/" element={<Layout>
                 <ErrorBoundary>
                   <InvoiceListDetailsLazy />
+                </ErrorBoundary>
+              </Layout>} />
+              <Route path='*' element={<Layout>
+                <ErrorBoundary>
+                  <NotFound />
                 </ErrorBoundary>
               </Layout>} />
             </Routes>
